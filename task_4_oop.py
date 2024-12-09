@@ -20,6 +20,8 @@ class Passport:
         self.date_issue = value
     def set_date_expiration(self, value):
         self.date_expiration = value
+    def __str__(self)-> str:
+        return f"Passport({self.name}, {self.surname}, {self.birth_date}, {self.sex}, {self.date_issue}, {self.date_expiration})"
     
 
 class ForeignPassport(Passport):
@@ -50,8 +52,8 @@ class ForeignPassport(Passport):
                 self.visas.append(visa)
                 print(f"Visa {visa} added")
         elif type(self.visas) == str:
-            self.visas = visa
-            print("Visa changed")
+            self.visas = [self.visas, visa]
+            print(f"Visa {visa} added")
         elif self.visas == None:
             self.visas = [visa]
             print("Visa added")
@@ -67,9 +69,12 @@ class ForeignPassport(Passport):
         elif self.visas == None:
             print("No visas")
 
-# for_passport=ForeignPassport("Mary","Maksi","29.09.2000","F","24.10.2018","24.11.2028",["USA"], "12345678")
-# for_passport.show_info()
-# for_passport.add_visa("Ukraine")
+    def __str__(self)->str:
+        return f"ForeignPassport({self.name}, {self.surname}, {self.birth_date}, {self.sex}, {self.date_issue}, {self.date_expiration}, {self.visas}, {self.passport_number})"
+
+for_passport=ForeignPassport("Mary","Maksi","29.09.2000","F","24.10.2018","24.11.2028",["USA"], "12345678")
+for_passport.show_info()
+for_passport.add_visa("Ukraine")
 
 class Number_count:
     number = 0
@@ -88,7 +93,6 @@ class Number_count:
         Number_count.number += 1
         return (temperature - 32) / 1.8
     
-# convert=Number_count()
 Number_count.show_info()
 temperature=Number_count.converting_to_fahrenheit(1)
 print(temperature)
