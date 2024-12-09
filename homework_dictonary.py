@@ -13,7 +13,7 @@ def deleteUser(login):
     else:
         del users[login]
         print("User deleted.")
-
+        
 def changePassword(login, newPassword):
     if login not in users:
         print("User with this login did not find")
